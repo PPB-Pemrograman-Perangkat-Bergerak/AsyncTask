@@ -14,10 +14,13 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     //Key for saving the state of the TextView
+    private static final String TEXT_ON_PROGRESS = "currentSleep";
     private static final String TEXT_STATE = "currentText";
+
 
     // The TextView where we will show results
     private TextView mTextView = null;
+    private TextView mTextViewProgress=null;
 
     /**
      * Initializes the activity.
@@ -29,10 +32,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //  Initialize mTextView
         mTextView = (TextView) findViewById(R.id.textView1);
-
+        mTextViewProgress = findViewById(R.id.textViewProgress);
         // Restore TextView if there is a savedInstanceState
         if(savedInstanceState!=null){
             mTextView.setText(savedInstanceState.getString(TEXT_STATE));
+            mTextViewProgress.setText(savedInstanceState.getString(TEXT_ON_PROGRESS));
         }
     }
 
@@ -48,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Start the AsyncTask.
         // The AsyncTask has a callback that will update the text view.
-        new SimpleAsyncTask(mTextView).execute();
+        new SimpleAsyncTask(mTextView,mTextViewProgress).execute();
     }
 
 
@@ -62,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         // Save the state of the TextView
         outState.putString(TEXT_STATE, mTextView.getText().toString());
+        outState.putString(TEXT_ON_PROGRESS, mTextViewProgress.getText().toString());
     }
 
     public class MyAsyncTask extends AsyncTask<String, Integer, Bitmap> {
