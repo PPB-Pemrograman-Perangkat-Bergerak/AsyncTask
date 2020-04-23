@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 /**
  * The SimpleAsyncTask app contains a button that launches an AsyncTask
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     // The TextView where we will show results
     private TextView mTextView = null;
     private TextView mTextViewProgress=null;
+    private ProgressBar mProgressBar;
 
     /**
      * Initializes the activity.
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         //  Initialize mTextView
         mTextView = (TextView) findViewById(R.id.textView1);
         mTextViewProgress = findViewById(R.id.textViewProgress);
+        mProgressBar = findViewById(R.id.progressBar);
         // Restore TextView if there is a savedInstanceState
         if(savedInstanceState!=null){
             mTextView.setText(savedInstanceState.getString(TEXT_STATE));
@@ -52,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Start the AsyncTask.
         // The AsyncTask has a callback that will update the text view.
-        new SimpleAsyncTask(mTextView,mTextViewProgress).execute();
+        new SimpleAsyncTask(mTextView,mTextViewProgress,mProgressBar).execute();
     }
 
 
