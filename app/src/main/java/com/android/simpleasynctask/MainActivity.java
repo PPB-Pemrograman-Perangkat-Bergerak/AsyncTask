@@ -63,4 +63,13 @@ public class MainActivity extends AppCompatActivity {
         // Save the state of the TextView
         outState.putString(TEXT_STATE, mTextView.getText().toString());
     }
+
+    public class MyAsyncTask extends AsyncTask<String, Integer, Bitmap> {
+        @Override
+        protected Bitmap doInBackground(String... strings) {
+            return null;
+        }
+
+    }
+    
 }
